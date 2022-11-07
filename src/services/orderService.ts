@@ -1,4 +1,3 @@
-import { OrderCreateDto } from 'dtos/OrderCreateDto';
 import { OrderDto } from 'dtos/OrderDto';
 import { OrderItemUpdateDto } from 'dtos/OrderItemUpdateDto';
 import { httpClient } from 'utilities/http-client';
@@ -24,8 +23,8 @@ const getById = async (id: number): Promise<OrderDto> => {
   return await response.json();
 };
 
-const create = async (createDto: OrderCreateDto): Promise<OrderDto> => {
-  const response = await httpClient.post('/orders', createDto);
+const create = async (): Promise<OrderDto> => {
+  const response = await httpClient.post('/orders', {});
 
   if (!response.ok) {
     try {
