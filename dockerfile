@@ -1,15 +1,23 @@
 #build environment
-FROM node:19-alpine as builder
+FROM node as build
 
 EXPOSE 3000
 
-WORKDIR /answerking-react
+WORKDIR /app
 
 COPY package.json yarn.lock ./
 
-#RUN yarn install --immutable --immutable-cache --check-cache
-RUN yarn install
+RUN yarn install --immutable --immutable-cache --check-cache
 
-COPY . .
+COPY . ./
 
 RUN npm run build
+
+#production environment
+FROM nginx
+
+COPY --from=build /app/build /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
