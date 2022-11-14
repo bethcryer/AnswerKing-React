@@ -3,7 +3,11 @@ import { resolve } from 'path';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
+<<<<<<< HEAD
   css: { preprocessorOptions: { scss: { quietDeps: true, }, }, },
+=======
+  css: { preprocessorOptions: { scss: { quietDeps: true } } },
+>>>>>>> upstream/develop
   plugins: [react()],
   resolve: {
     alias: {
@@ -18,6 +22,7 @@ export default defineConfig({
     },
   },
   server: {
+<<<<<<< HEAD
     host: '0.0.0.0',
     port: 3000,
     fs: { strict: true, },
@@ -26,6 +31,14 @@ export default defineConfig({
         target: 'https://localhost:5001',
         secure: false
       }
+=======
+    fs: { strict: true },
+    proxy: {
+      '/api': {
+        target: 'https://localhost:44333', //<-- add url for the API here:
+        secure: false,
+      },
+>>>>>>> upstream/develop
     },
   },
 });

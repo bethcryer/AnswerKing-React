@@ -1,5 +1,5 @@
 #build environment
-FROM node as build
+FROM node:19 as build
 
 EXPOSE 3000
 
@@ -14,7 +14,7 @@ COPY . ./
 RUN npm run build
 
 #production environment
-FROM nginx
+FROM nginx:stable
 
 COPY --from=build /app/build /usr/share/nginx/html
 
