@@ -5,6 +5,8 @@ EXPOSE 3000
 
 WORKDIR /app
 
+ENV PATH /app/node_modules/.bin:$PATH
+
 COPY package.json yarn.lock ./
 
 RUN yarn install --immutable --immutable-cache --check-cache
@@ -16,7 +18,7 @@ RUN npm run build
 #production environment
 FROM nginx:stable
 
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build /app/dist /usr/share/nginx/html
 
 EXPOSE 80
 
